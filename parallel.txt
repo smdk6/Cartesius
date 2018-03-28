@@ -2,7 +2,6 @@
 #SBATCH -t 1:00:00
 #SBATCH -n 24
 #SBATCH -p short
-#SBATCH --reservation=cbmucl
 
 #Load modules
 module load eb
