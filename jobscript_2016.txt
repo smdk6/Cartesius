@@ -15,7 +15,7 @@ export TMPDIR=~/qiime_tmp
 
 # splitting libraries 
 echo "splitting libraries"
-time split_libraries_fastq.py -m ~/2016_02_smb/map.tsv -i ~/2016_02_smb/Read1.fastq.gz ~/2016_02_smb/Read2.fastq.gz -b ~/2016_02_smb/Index.fastq.gz -o ~/2016_02_smb/slout_2016/ -q 19 --rev_comp_barcode --rev_comp_mapping_barcodes
+time split_libraries_fastq.py -m ~/2016_02_smb/map.tsv -i ~/2016_02_smb/Read1.fastq.gz -i ~/2016_02_smb/Read2.fastq.gz -b ~/2016_02_smb/Index.fastq.gz -o ~/2016_02_smb/slout_2016/ -q 19 --rev_comp_barcode --rev_comp_mapping_barcodes
 
 # picking otus
 echo "picking otus"
