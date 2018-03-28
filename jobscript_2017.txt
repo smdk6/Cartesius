@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 6
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+# splitting libraries 
+echo "splitting libraries"
+time split_libraries_fastq.py --barcode_type 12 -i ~/2017_03_smb/Read1.fastq.gz -i ~/2017_03_smb/Read2.fastq.gz -m ~/2017_03_smb/map.tsv -b ~/2017_03_smb/Index.fastq.gz -o ~/2017_03_smb/slout_2017/ -q 19 --rev_comp_barcode --rev_comp_mapping_barcodes
+
+# picking otus
+echo "picking otus"
+time pick_closed_reference_otus.py -i ~/2017_03_smb/slout_2017/seqs.fna -o ~/2017_03_smb/otus_2017
+
+# diversity analyses
+echo "diversity analyses"
+time core_diversity_analyses.py --recover_from_failure -o cdout -i ~/2017_03_smb/otus_2017/otu_table.biom -m ~/2017_03_smb/map.tsv -t ~/2017_03_smb/otus_2017/97_otus.tree -e 1898
+
+# counting sequences 
+echo "Counting sequences"
+time count_seqs.py -i ~/2017_03_smb/slout_2017/seqs.fna
+
+#deactivating environment
+source deactivate 
