@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+#SBATCH --reservation=cbmucl
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+# splitting libraries 
+echo "splitting libraries"
+time split_libraries_fastq.py --barcode_type 12 -i
+Read1.fastq.gz -b Index.fastq.gz -o slout_50k_otu -m min_map.tsv
+
+# counting sequences 
+echo "Counting sequences"
+time count_seqs.py -i slout_50k_otu/seqs.fna
+
+#deactivating environment
+source deactivate 
