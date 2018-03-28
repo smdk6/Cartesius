@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -t 6:00:00
-#SBATCH -n 16
-#SBATCH -p short
+#SBATCH -t 10:00:00
+#SBATCH -n 24
+#SBATCH -p normal
 
 #Load modules
 module load eb
