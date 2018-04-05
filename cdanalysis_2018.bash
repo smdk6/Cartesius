@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -t 1:00:00
+#SBATCH -t 6:00:00
 #SBATCH -n 24
-#SBATCH -p short
+#SBATCH -p normal
 
 #Load modules
 module load eb
@@ -18,7 +18,7 @@ echo "diversity analyses"
 time core_diversity_analyses.py --recover_from_failure \
 -o cdout_2018 \
 -i ~/2018_02_smb/otus_2018/otu_table.biom \
--m ~/2018_02_smb/map.tsv \
+-m ~/2018_02_smb/map_incomplete.tsv \
 -t ~/2018_02_smb/otus_2018/97_otus.tree \
 -e 1000
 
