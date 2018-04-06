@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -t 10:00:00
+#SBATCH -t 12:00:00
 #SBATCH -n 24
 #SBATCH -p normal
 
@@ -11,12 +11,11 @@ module load Miniconda2
 source activate qiime1
 
 # setting temporary directory
-export TMPDIR=~/qiime_tmp
+export TMPDIR=~/qiime1_tmp
 
 # picking otus
 echo "picking otus"
-time pick_closed_reference_otus.py -i ~/2017_03_smb/slout_2017/seqs.fna -o ~/2017_03_smb/otus_2017 -a
--O 16
+time pick_closed_reference_otus.py -i ~/2017_03_smb/slout_2017_x/seqs.fna -o ~/2017_03_smb/otus_2017_x
 
 #deactivating environment
 source deactivate 

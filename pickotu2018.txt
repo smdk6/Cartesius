@@ -11,12 +11,11 @@ module load Miniconda2
 source activate qiime1
 
 # setting temporary directory
-export TMPDIR=~/qiime_tmp
+export TMPDIR=~/qiime1_tmp
 
 # picking otus
 echo "picking otus"
-time pick_closed_reference_otus.py -i ~/2018_02_smb/slout_2018/seqs.fna -o ~/2018_02_smb/otus_2018 -a
--O 16
+time pick_closed_reference_otus.py -i ~/2018_02_smb/slout_2018_x/seqs.fna -o ~/2018_02_smb/otus_2018_xx
 
 #deactivating environment
 source deactivate 

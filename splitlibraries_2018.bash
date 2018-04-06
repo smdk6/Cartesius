@@ -15,7 +15,7 @@ export TMPDIR=~/qiime_tmp
 
 # splitting libraries 
 echo "splitting libraries BOOYEAH"
-time split_libraries_fastq.py --barcode_type 12 -i ~/2018_02_smb/fastqjoined_ends/fastqjoin.join.fastq -m ~/2018_02_smb/map_incomplete.tsv -b ~/2018_02_smb/fastqjoined_ends/fastqjoin.join_barcode.fastq -o ~/2018_02_smb/slout_2018/ -q 19 --rev_comp_barcode --rev_comp_mapping_barcodes
+time split_libraries_fastq.py --barcode_type 12 -i ~/2018_02_smb/fastqjoined_ends/fastqjoin.join.fastq -m ~/2018_02_smb/map_incomplete.tsv -b ~/2018_02_smb/fastqjoined_ends/fastqjoin.join_barcodes.fastq -o ~/2018_02_smb/slout_2018_x/ -q 3 --rev_comp_barcode --rev_comp_mapping_barcodes
 
 #deactivating environment
 source deactivate 

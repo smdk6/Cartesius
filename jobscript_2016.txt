@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -t 1:00:00
+#SBATCH -t 10:00:00
 #SBATCH -n 24
-#SBATCH -p short
+#SBATCH -p normal
 
 #Load modules
 module load eb
@@ -15,19 +15,20 @@ export TMPDIR=~/qiime_tmp
 
 # splitting libraries 
 echo "splitting libraries"
-time split_libraries_fastq.py --barcode_type 12 -i ~/2016_02_smb/Read1.fastq.gz -i ~/2016_02_smb/Read2.fastq.gz -m ~/2016_02_smb/map.tsv -b ~/2016_02_smb/Index.fastq.gz -o ~/2016_02_smb/slout_2016/ -q 19 --rev_comp_barcode --rev_comp_mapping_barcodes
+time split_libraries_fastq.py --barcode_type 12 -i ~/2016_02_smb/Read1.fastq.gz -i ~/2016_02_smb/Read2.fastq.gz -m ~/2016_02_smb/map.tsv -b ~/2016_02_smb/Index.fastq.gz -o ~/2016_02_smb/slout_2016_x/ -q 3 --rev_comp_barcode --rev_comp_mapping_barcodes
 
 # picking otus
 echo "picking otus"
-time pick_closed_reference_otus.py -i ~/2016_02_smb/slout_2016/seqs.fna -o ~/2016_02_smb/otus_2016
+time pick_closed_reference_otus.py -i ~/2016_02_smb/slout_2016_x/seqs.fna -o ~/2016_02_smb/otus_2016_x -a 
+-O 16
 
 # diversity analyses
 echo "diversity analyses"
-time core_diversity_analyses.py --recover_from_failure -o cdout -i ~/2016_02_smb/otus_2016/otu_table.biom -m ~/2016_02_smb/map.tsv -t ~/2016_02_smb/otus_2016/97_otus.tree -e 1898
+time core_diversity_analyses.py --recover_from_failure -o cdout -i ~/2016_02_smb/otus_2016_x/otu_table.biom -m ~/2016_02_smb/map.tsv -t ~/2016_02_smb/otus_2016_x/97_otus.tree -e 1000
 
 # counting sequences 
 echo "Counting sequences"
-time count_seqs.py -i ~/2016_02_smb/slout_2016/seqs.fna
+time count_seqs.py -i ~/2016_02_smb/slout_2016_x/seqs.fna
 
 #deactivating environment
 source deactivate 

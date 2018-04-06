@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -t 12:00:00
+#SBATCH -t 1:00:00
 #SBATCH -n 24
-#SBATCH -p normal
+#SBATCH -p short
 
 #Load modules
 module load eb
@@ -15,7 +15,7 @@ export TMPDIR=~/qiime_tmp
 
 # picking otus
 echo "picking otus"
-time pick_closed_reference_otus.py -i ~/2016_02_smb/slout_2016_x/seqs.fna -o ~/2016_02_smb/otus_2016_x 
+time pick_open_reference_otus.py -i ~/2018_02_smb/slout_2018_x/seqs.fna -o ~/2018_02_smb/otus_2018_open
 
 #deactivating environment
 source deactivate 
